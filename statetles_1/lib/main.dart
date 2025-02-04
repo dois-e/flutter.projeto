@@ -23,7 +23,7 @@ class Aplicativo extends StatelessWidget {
       home: Scaffold(
         //appbar a barra superior
         appBar: AppBar(
-          leading: Icon(Icons.apple, size: 50),
+       
           title: Text('flutter é divertido'),
           backgroundColor: Colors.deepPurpleAccent,
         ),
@@ -85,6 +85,31 @@ bottomNavigationBar: BottomNavigationBar(items:[
  BottomNavigationBarItem(icon:Icon(Icons.add_a_photo),label:"fotos" ),
  BottomNavigationBarItem(icon:Icon(Icons.search),label:"buscar" ),
 ]),
+
+
+drawer: Drawer(
+  backgroundColor: Colors.deepPurpleAccent,
+  child: ListView(
+    padding: EdgeInsets.zero, //zerar padding
+    children:  [
+      DrawerHeader(
+        child:Text('Texto de Cabeçalho')
+
+      ),
+      ListTile(
+        leading:Icon(Icons.account_circle),
+        title: Text("Perfil"),
+        onTap: () {print("entrou no perfil");},
+      ),
+      ListTile(
+        leading: Icon( Icons.settings),
+        title:Text("configurações"),
+        onTap:(){ },
+      ),
+    ],
+  ),
+),
+     
 
 
 
