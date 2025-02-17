@@ -26,14 +26,27 @@ void main(){
               Image.network('https://vueda.github.io/flutter-docs-ptbr/flutter-logo-full.png', width: 300, height: 300,),
               
               SizedBox(height:20,),
-              Text("conteudo da pagina inicial"),
+              Text("O que é fluter", style: TextStyle(fontSize: 20),),
+              Text('''Flutter é um framework do Google para criar multiplataforma
+              Serve para android,ios,web,desktop entre outros,usando a linguagem DART.\n 
+              possui widgets, que são blocos de construção da interface no flutter, toda tela é
+              um widget, desde botões e textos até layouts mais complexos.Eles podem ser
+              ''', textAlign:TextAlign.center,),
+
+              ListTile(leading: Icon(Icons.arrow_circle_right_outlined),
+                title: Text("Statefull: Com estado dinãmico, a tela mudal"),), 
+
+              ListTile(leading: Icon(Icons.arrow_circle_right_outlined),
+                title: Text("Stateless: Imutavel ,a tela sempre é a mesma"),),
             ],
+                
+              ),
   
            ),
             
         ),
-      ),
-     );   
+      );
+   
         
 
 

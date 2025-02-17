@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:statetles_1/paginainicial.dart';
 
 //função principal que inicia aplicativo
 void main() {
-  runApp(Aplicativo());
+  runApp(home());
+}
+
+class home extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData.dark(),
+      debugShowCheckedModeBanner: false,
+      home: Aplicativo(),
+    );
+  }
 }
 
 //criando minha classe propria
@@ -16,11 +28,7 @@ class Aplicativo extends StatelessWidget {
 //materialapp e o que personaliza o tema
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark(),
-      debugShowCheckedModeBanner: false,
-      //home e a primeira tela que carrega
-      home: Scaffold(
+    return  Scaffold(
         //appbar a barra superior
         appBar: AppBar(
        
@@ -101,6 +109,14 @@ drawer: Drawer(
         title: Text("Perfil"),
         onTap: () {print("entrou no perfil");},
       ),
+       ListTile(
+        leading:Icon(Icons.home),
+        title: Text("Pagina inicial"),
+        onTap: () {
+         Navigator.pop(context);
+         Navigator.push(context, MaterialPageRoute(builder:(context)=> PaginaInicial()));
+         },
+      ),
       ListTile(
         leading: Icon( Icons.settings),
         title:Text("configurações"),
@@ -114,7 +130,7 @@ drawer: Drawer(
 
 
 
-),
+
 
       
     );
