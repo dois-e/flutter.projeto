@@ -18,9 +18,9 @@ class Aplicativo extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         '/tela1':(context) => Cadastro(pessoas:pessoas), 
-        '/tela2': (context) => Tela2(), 
+        '/tela2':(context) => TabelaPai(), 
         '/tela3':(context) => Tela3(), 
-        '/tela4': (context) => Tela4(),
+        '/tela4':(context) => Tela4(),
       },
     );
   }

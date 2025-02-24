@@ -1,5 +1,10 @@
  
- import 'package:flutter/material.dart';
+ import 'dart:convert';
+
+import 'package:flutter/material.dart';
+ import 'package:http/http.dart' as http;
+
+ //criando classe pessoa
  class Pessoa{
   String nome;
   String email;
@@ -27,6 +32,19 @@ final emailControle = TextEditingController();
 final telefoneControle = TextEditingController();
 final enderecoControle = TextEditingController();
 final cidadeControle = TextEditingController();
+
+
+  //criando metodo de cadastro , metodo API de POST
+   Future<void> cadastrarPessoa(Pessoa pessoa) async {
+    final url= Uri.parse("https://duoware-5d706-default-rtdb.firebaseio.com/pessoa.json");
+    final resposta = await http.post( url , body: jsonEncode({
+      "nome":pessoa.nome,
+      "email":pessoa.email,
+      "telefone":pessoa.telefone,
+      "cidade":pessoa.cidade
+      }));
+   }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,9 +75,12 @@ final cidadeControle = TextEditingController();
                    enderecoControle.text,
                    cidadeControle.text,
                   );
+                 
                   //adicionando pessoa na lista "ex:seu Arlindo"
-                  widget.pessoas.add(pessoaNova); 
-                  print(widget.pessoas.length);
+
+                  //widget.pessoas.add(pessoaNova);
+                  cadastrarPessoa(pessoaNova);
+ 
                   //limpar os campos
                    nomeControle.clear();
                    emailControle.clear(); 
