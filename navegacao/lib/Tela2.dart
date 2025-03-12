@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:navegacao/Tela1.dart';
+import "package:navegacao/Detalhes.dart";
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 
@@ -93,14 +94,18 @@ class Tabela extends State<TabelaPai> {
           IconButton(
              onPressed: () => abrirWhats(pessoas[index].telefone),
               icon: Icon(Icons.delete_rounded, color: Colors.red,)
-         
        ),
-
-            ],
-          ),
+       
+           ],
+              ),
+              //quando clicar no item da lista (onTap)
+              onTap: () {
+                Navigator.push(context , 
+                MaterialPageRoute(builder: (context) => Detalhes(pessoa:pessoas[index])));
+              },
          
         );
-          },
+          }
       ),
     ),
     );
