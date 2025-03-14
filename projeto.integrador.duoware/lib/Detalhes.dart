@@ -24,10 +24,9 @@ class Detalhes extends StatelessWidget {
               Text(pessoa.nome, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
               SizedBox(height: 10,),
               Text("Nome: ${pessoa.nome}", style: TextStyle(fontSize: 18)),
-              Text("Email: ${pessoa.email}", style: TextStyle(fontSize: 18)),
-              Text("Telefone: ${pessoa.telefone}", style: TextStyle(fontSize: 18)),
-              Text("Endereço: ${pessoa.endereco}", style: TextStyle(fontSize: 18)),
-              Text("Cidade: ${pessoa.cidade}", style: TextStyle(fontSize: 18)),
+              Text("Desde: ${pessoa.dataCriacao}", style: TextStyle(fontSize: 18)),             
+              Text("nivel: ${pessoa.nivel}", style: TextStyle(fontSize: 18)),             
+          
             ],
           ),
         )

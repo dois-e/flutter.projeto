@@ -1,5 +1,5 @@
- 
- import 'dart:convert';
+
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:navegacao/Tela1.dart';
@@ -13,7 +13,7 @@ class TabelaPai extends StatefulWidget{
 
 }
 
-class Tabela extends State<TabelaPai> {
+class Tabela extends State<TabelaPai> { 
 
   @override
   void initState(){
@@ -24,7 +24,7 @@ class Tabela extends State<TabelaPai> {
   final List <Pessoa> pessoas = [];
   //Tabela({required this.pessoas});
 
-  //construindo netodo de exclusão
+  //construindo metodo de exclusão
   Future<void> excluir(String id) async{
     final url = Uri.parse("link do banco");
   }
@@ -44,9 +44,9 @@ class Tabela extends State<TabelaPai> {
         id,
         dadosPessoa["nome"] ?? '',
         dadosPessoa["email"] ?? '',
-        dadosPessoa["telefone"] ?? '',
-        dadosPessoa["endereço"] ?? '',
-        dadosPessoa["cidade"] ?? ''
+        dadosPessoa["senha"] ?? '',
+        dadosPessoa["dataCriacao"] ?? '',
+        dadosPessoa["nivel"] ?? ''
         );
         pessoas.add(pessoaNova);
         //adiciona na lista a pessoa, para exibir
@@ -61,7 +61,8 @@ class Tabela extends State<TabelaPai> {
       throw Exception('Não pode iniciar $url');
     }
   }
-  
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,22 +80,19 @@ class Tabela extends State<TabelaPai> {
           leading: Icon(Icons.person),
           title: Text(pessoas[index].nome),
           subtitle: Text(
-            "Tel:"+ pessoas[index].telefone +
-            "\n Email" + pessoas[index].email+
-            "\n Email" + pessoas[index].endereco+
-            "\n cidade" + pessoas[index].cidade
+           
+            "\n Email" + pessoas[index].email
+           
+           
           ),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
             IconButton(
-             onPressed: () => abrirWhats(pessoas[index].telefone),
+             onPressed: () => abrirWhats(pessoas[index].email),
           icon: Icon(Icons.message, color: Colors.green,)
           ), 
-          IconButton(
-             onPressed: () => abrirWhats(pessoas[index].telefone),
-              icon: Icon(Icons.delete_rounded, color: Colors.red,)
-       ),
+
        
            ],
               ),
