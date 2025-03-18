@@ -90,10 +90,12 @@ class Tabela extends State<TabelaPai> {
             children: [
             IconButton(
              onPressed: () => abrirWhats(pessoas[index].email),
-          icon: Icon(Icons.message, color: Colors.green,)
-          ), 
-
-       
+          icon: Icon(Icons.message, color: Colors.green,)),
+             IconButton(
+             onPressed: () => abrirWhats(pessoas[index].nome),
+              icon: Icon(Icons.delete_rounded, color: Colors.red,)
+       ), 
+     
            ],
               ),
               //quando clicar no item da lista (onTap)
