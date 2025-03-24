@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:navegacao/main.dart';
 
 void main(){
   runApp(Preconfiguracao());
@@ -26,9 +27,46 @@ class Login extends StatefulWidget {
 class LoginEstado extends State<Login>{
  final emailControle = TextEditingController();
  final senhaControle = TextEditingController();
- bool estaCarregado = false;
+ bool estaCarregando = false;
  String mensagemErro = '';
  bool ocultado = true;
+
+ Future<void> logar() async{
+
+ setState(() {
+   estaCarregando = true;
+   mensagemErro = '';
+});  
+ final url = Uri.parse('https://duoware-5d706-default-rtdb.firebaseio.com/usuario.json');
+ final resposta = await http.get(url);
+ //se tudo estiver certo..
+ if(resposta.statusCode == 200){
+  final Map<String,dynamic>? dados = jsonDecode(resposta.body);
+
+if(dados != null){
+  bool usuarioValido = false;
+  String nomeUsuario = '';
+
+   print(emailControle.text);
+   print(senhaControle.text);
+  
+  dados.forEach((Key, value){
+    if(value['email'] == emailControle.text && value['senha'] == senhaControle.text){
+      usuarioValido = true;
+      nomeUsuario = valor["usuario"];
+    }
+  });
+}
+//se o usuario for valido ou seja, se tiver no banco
+if(usuarioValido == true){
+  Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => Aplicativo()));
+}
+}
+
+
+}else
+   setState(() { mensagemErro = 'Erro de conexão';});
+ }
 
   @override
   Widget build(BuildContext context){
@@ -72,7 +110,7 @@ class LoginEstado extends State<Login>{
                 ),
                ),
               SizedBox(height: 30,),
-              estaCarregado ? CircularProgressIndicator():
+              estaCarregando ? CircularProgressIndicator():
               ElevatedButton(onPressed: null, child: Text('Entrar')),
               SizedBox(height: 30,),
               TextButton(onPressed: (){
