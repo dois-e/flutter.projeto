@@ -1,20 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Resultado(acertos: 3),
-    );
-  }
-}
-
 class Resultado extends StatelessWidget {
   final int acertos;
 
@@ -39,7 +24,7 @@ class Resultado extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    print('pressionado');
+                    Navigator.pushReplacementNamed(context, '/quiz');
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.all(20),

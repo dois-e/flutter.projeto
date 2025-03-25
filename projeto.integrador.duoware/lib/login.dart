@@ -47,23 +47,23 @@ if(dados != null){
   bool usuarioValido = false;
   String nomeUsuario = '';
 
-   print(emailControle.text);
-   print(senhaControle.text);
-  
-  dados.forEach((Key, value){
-    if(value['email'] == emailControle.text && value['senha'] == senhaControle.text){
+  dados.forEach((Key, valor){
+    if(valor['email'] == emailControle.text && valor['senha'] == senhaControle.text ){
       usuarioValido = true;
-      nomeUsuario = valor["usuario"];
+      nomeUsuario = valor['nome'];
     }
   });
-}
 //se o usuario for valido ou seja, se tiver no banco
 if(usuarioValido == true){
-  Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => Aplicativo()));
+  Navigator.pushReplacement(context,
+   MaterialPageRoute(builder:(context) => Aplicativo(nomeUsuario:nomeUsuario)));
+}else{
+  setState(() {
+    mensagemErro = "Email ou senha inválidos";
+    estaCarregando = false;
+  });
 }
 }
-
-
 }else
    setState(() { mensagemErro = 'Erro de conexão';});
  }
@@ -111,11 +111,12 @@ if(usuarioValido == true){
                ),
               SizedBox(height: 30,),
               estaCarregando ? CircularProgressIndicator():
-              ElevatedButton(onPressed: null, child: Text('Entrar')),
+              ElevatedButton(onPressed: logar, child: Text('Entrar')),
               SizedBox(height: 30,),
               TextButton(onPressed: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => Cadastro()));
               }, child: Text('Não tem uma conta? cadastre-se'),), 
+              mensagemErro.isNotEmpty ? Text(mensagemErro, style:TextStyle(color: Colors.red),):SizedBox(),
               ],
             ),
           )          

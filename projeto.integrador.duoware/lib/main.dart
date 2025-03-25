@@ -6,17 +6,19 @@ import 'package:navegacao/Tela2.dart';
 import 'package:navegacao/Tela3.dart';
 import 'package:navegacao/Tela4.dart';
 
-void main() => runApp(Aplicativo());
 
+//classe pai que configura as rotas
 class Aplicativo extends StatelessWidget {
   final List<Pessoa> pessoas = [];
+  final String nomeUsuario;
+  Aplicativo({required this.nomeUsuario});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Menu Principal',
+      title: 'projeto integrador',
       theme: ThemeData.dark(),
-      home: Menu(),
+      home: Menu(nomeUsuario:nomeUsuario),
       debugShowCheckedModeBanner: false,
       routes: {
         '/tela1': (context) => Cadastro(pessoas: pessoas),
@@ -29,12 +31,14 @@ class Aplicativo extends StatelessWidget {
 }
 
 class Menu extends StatelessWidget {
+  final String nomeUsuario;
+  Menu({required this.nomeUsuario});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Menu Principal', style: TextStyle(color: Colors.white)),
-        backgroundColor: Color.fromARGB(255, 104, 79, 173),
+        title: Text('bem-vindo $nomeUsuario', style: TextStyle(color: Colors.white)),
+        backgroundColor: Color.fromARGB(255, 104, 79, 173),centerTitle: true,
       ),
       body: Center(
         child: GridView.count(

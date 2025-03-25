@@ -16,8 +16,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => const Homepage(),
-        '/quiz': (context) =>  Quiz(),  // Corrigido para '/quiz'
+        '/': (context) => Homepage(),
+        '/quiz': (context) => Quiz(),
+  // Corrigido para '/quiz'
       },
       onGenerateRoute: (settings) {
         if (settings.name == '/resultados') {
