@@ -79,8 +79,13 @@ if(usuarioValido == true){
         child:Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.person_pin, size: 100, color: Colors.blue,),
-            SizedBox(height: 20,),
+            FadeInImage(
+            placeholder:AssetImage('imagens/gif.fff.gif'),
+            image: AssetImage('imagens/foto.png.png'),
+            fadeInDuration: Duration(seconds: 3),
+            fadeOutDuration: Duration(seconds: 9),
+            width: 200,
+            ),
             TextField(
               controller: emailControle,
               decoration: InputDecoration(
