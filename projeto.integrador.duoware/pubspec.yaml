@@ -68,6 +68,7 @@ flutter:
   assets: 
    - imagens/foto.png.png
    - imagens/gif.fff.gif
+   - imagens/duo.png.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

@@ -1,123 +1,93 @@
 import 'package:flutter/material.dart';
 
 class Quiz extends StatefulWidget {
-  const Quiz({Key? key}) : super(key: key);
+  final List<Map<String, dynamic>> quiz;
+  const Quiz({Key? key, required this.quiz}) : super(key: key);
 
   @override
   _QuizState createState() => _QuizState();
 }
 
 class _QuizState extends State<Quiz> {
+  late List<Map<String, dynamic>> quizPreparado;
   int perguntaNumero = 1;
   int acertos = 0;
   int erros = 0;
 
   @override
-  Widget build(BuildContext context) {
-    List quiz = [
-      {
-        "pergunta": "Quem descobriu o Brasil?",
-        "respostas": [
-          "Dom Pedro 1",
-          "Pedro Álvares Cabral",
-          "Tiradentes",
-        ],
-        "alternativa_correta": 2,
-      },
-      {
-        "pergunta": "O Flutter é?",
-        "respostas": [
-          "Uma linguagem",
-          "Um aplicativo",
-          "Um SDK",
-        ],
-        "alternativa_correta": 3,
+  void initState() {
+    super.initState();
+
+    quizPreparado = List<Map<String, dynamic>>.from(widget.quiz);
+
+    // Embaralha a ordem das perguntas
+    quizPreparado.shuffle();
+
+    // Embaralha as respostas de cada pergunta e atualiza o índice da correta
+    for (var elemento in quizPreparado) {
+      int alternativaCorretaOriginal = elemento['alternativa_correta'];
+      String respostaCorreta = elemento['respostas'][alternativaCorretaOriginal - 1];
+
+      elemento['respostas'].shuffle();
+
+      int novaCorreta = elemento['respostas'].indexOf(respostaCorreta) + 1;
+      elemento['alternativa_correta'] = novaCorreta;
+    }
+  }
+
+  void respondeu(int respostaNumero) {
+    setState(() {
+      if (quizPreparado[perguntaNumero - 1]['alternativa_correta'] == respostaNumero) {
+        acertos++;
+        print("Acertou");
+      } else {
+        erros++;
+        print("Errou");
       }
-    ];
 
-    // Gerar perguntas adicionais
-    for (int i = 2; i <= 10; i++) {
-      quiz.add({
-        "pergunta": "Pergunta $i",
-        "respostas": [
-          "Resposta 1",
-          "Resposta 2",
-          "Resposta 3",
-        ],
-        "alternativa_correta": 1,
-      });
-    }
+      print('Acertos: $acertos | Erros: $erros');
 
-    // Função que avalia a resposta do usuário
-    void respondeu(int respostaNumero) {
-      setState(() {
-        if (quiz[perguntaNumero - 1]['alternativa_correta'] == respostaNumero) {
-          acertos++;
-          print("Acertou");
-        } else {
-          erros++;
-          print("Errou");
-        }
-        print('Acertos: $acertos | Erros: $erros');
+      if (perguntaNumero == quizPreparado.length) {
+        Navigator.pushNamed(context, '/resultados', arguments: acertos);
+      } else {
+        perguntaNumero++;
+      }
+    });
+  }
 
-        if (perguntaNumero == 10) {
-          print("Terminou o quiz");
-          // Exemplo de navegação para a tela de resultados
-          Navigator.pushNamed(context, '/resultados', arguments: acertos);
-        } else {
-          perguntaNumero++;
-        }
-      });
-    }
+  @override
+  Widget build(BuildContext context) {
+    var perguntaAtual = quizPreparado[perguntaNumero - 1];
 
     return Scaffold(
       appBar: AppBar(
         title: const Center(child: Text('Quiz')),
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
-              'Pergunta:\n\n' + quiz[perguntaNumero - 1]['pergunta'],
-              style: TextStyle(fontSize: 30),
+              'Pergunta $perguntaNumero:\n\n${perguntaAtual['pergunta']}',
+              style: const TextStyle(fontSize: 28),
+              textAlign: TextAlign.center,
             ),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  respondeu(1);  // Chamando a função com a resposta 1
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+            ...List.generate(3, (index) {
+              return SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () => respondeu(index + 1),
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+                  ),
+                  child: Text(
+                    perguntaAtual['respostas'][index],
+                    style: const TextStyle(fontSize: 22),
+                  ),
                 ),
-                child: Text(quiz[perguntaNumero - 1]['respostas'][0], style: TextStyle(fontSize: 30)),
-              ),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  respondeu(2);  // Chamando a função com a resposta 2
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
-                ),
-                child: Text(quiz[perguntaNumero - 1]['respostas'][1], style: TextStyle(fontSize: 30)),
-              ),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  respondeu(3);  // Chamando a função com a resposta 3
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
-                ),
-                child: Text(quiz[perguntaNumero - 1]['respostas'][2], style: TextStyle(fontSize: 30)),
-              ),
-            ),
+              );
+            }),
           ],
         ),
       ),

@@ -81,10 +81,10 @@ if(usuarioValido == true){
           children: [
             FadeInImage(
             placeholder:AssetImage('imagens/gif.fff.gif'),
-            image: AssetImage('imagens/foto.png.png'),
+            image: AssetImage('imagens/duo.png.png'),
             fadeInDuration: Duration(seconds: 3),
             fadeOutDuration: Duration(seconds: 9),
-            width: 200,
+            width: 500,
             ),
             TextField(
               controller: emailControle,

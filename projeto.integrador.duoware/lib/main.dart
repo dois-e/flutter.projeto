@@ -5,6 +5,7 @@ import 'package:navegacao/Tela1.dart';
 import 'package:navegacao/Tela2.dart';
 import 'package:navegacao/Tela3.dart';
 import 'package:navegacao/Tela4.dart';
+import 'package:navegacao/Postagem.dart';
 
 
 //classe pai que configura as rotas
@@ -23,7 +24,7 @@ class Aplicativo extends StatelessWidget {
       routes: {
         '/tela1': (context) => Cadastro(pessoas: pessoas),
         '/tela2': (context) => TabelaPai(),
-        '/tela3': (context) => Tela3(),
+        '/tela3': (context) => CadastrarPostagem(username:nomeUsuario),
         '/tela4': (context) => Tela4(),
       },
     );
@@ -46,8 +47,8 @@ class Menu extends StatelessWidget {
           children: <Widget>[
             Botao(texto: 'cadastrar', rota: '/tela1', icone: Icons.arrow_back, cor: const Color.fromARGB(255, 255, 255, 255)),
             Botao(texto: 'Principal', rota: '/tela2', icone: Icons.home, cor: Colors.white),
-            Botao(texto: 'tela4', rota: '/tela4', icone: Icons.account_circle, cor: Colors.white),
-            Botao(texto: 'tela3', rota: '/tela3', icone: Icons.settings, cor: Colors.white),
+            Botao(texto: 'criar postagem', rota: '/tela3', icone: Icons.post_add , cor: Colors.white),
+            Botao(texto: 'tela', rota: '/tela4', icone: Icons.settings, cor: Colors.white),
           ],
         ),
       ),
