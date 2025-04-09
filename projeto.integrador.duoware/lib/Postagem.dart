@@ -16,12 +16,12 @@ class CadastrarPostagemEstado extends State<CadastrarPostagem>{
     final conteudoControle = TextEditingController();
     final imagemControle = TextEditingController();
 
-    Future<void> CadastrarPostagem() async {
+    Future<void> cadastrarPostagem() async {
       final titulo = tituloControle.text;
       final conteudo = conteudoControle.text;
       final imagem = imagemControle.text;
 
-      if(titulo.isNotEmpty && conteudo.isEmpty){
+      if(titulo.isNotEmpty && conteudo.isNotEmpty){
         final url = Uri.parse("https://duoware-5d706-default-rtdb.firebaseio.com/postagem.json");
         final resposta = await http.post(
           url, body: jsonEncode({
@@ -39,7 +39,7 @@ class CadastrarPostagemEstado extends State<CadastrarPostagem>{
     return Scaffold(
       appBar: AppBar(
         title: Text('cadastre seu post'),
-        backgroundColor: Colors.blue,
+        backgroundColor: const Color.fromARGB(255, 160, 5, 231),
         foregroundColor: Colors.white,
       ),
   body: Padding(padding:const EdgeInsets.all(16.0),
@@ -60,7 +60,7 @@ class CadastrarPostagemEstado extends State<CadastrarPostagem>{
         decoration: InputDecoration(labelText: 'link da imagem'),
         ),
         SizedBox(height: 16,),
-        ElevatedButton(onPressed: CadastrarPostagem, child: Text("Postar")),
+        ElevatedButton(onPressed: cadastrarPostagem, child: Text("Postar")),
     ],
    ),
  ),
@@ -69,37 +69,73 @@ class CadastrarPostagemEstado extends State<CadastrarPostagem>{
 }
 
 class VerPostagens extends StatelessWidget{
-  @override
+
+  Future<List<Map<String,dynamic>>> buscarPostagens() async{
+    final url = Uri.parse('https://duoware-5d706-default-rtdb.firebaseio.com/postagem.json');
+    final resposta = await http.get(url);
+    final Map<String, dynamic> dados = jsonDecode(resposta.body);
+    //criando List de objetos posts
+    final List<Map<String,dynamic>> posts = [];
+    dados.forEach((key, valor){
+      posts.add({
+        'titulo': valor['titulo'],
+        'conteudo': valor['conteudo'],
+        'autor': valor['autor'],
+        'imagem': valor['imagem'],
+      });
+    });
+    return posts;
+  }
+   @override
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(title: Text("ver postagens",),
-      backgroundColor: Colors.blue,
+      backgroundColor: const Color.fromARGB(255, 145, 11, 223),
       foregroundColor: Colors.white,),
-      body: FutureBuilder<List<Map<String<dynamic>>>(
-        future:null,
-        Builder: (context, snapshot){
+      body: FutureBuilder<List<Map<String,dynamic>>>(
+        future: buscarPostagens(),
+        builder: (context, snapshot){
           if(snapshot.connectionState == ConnectionState.waiting){
             return Center(child: CircularProgressIndicator());
           }
-            if(snapshot.hasErro) {
+            if(snapshot.hasError) {
             return Center(child: Text("erro ao carregar postagem"),);
             }
 
-          if(snapshot.hasData || snapshot.data!.isEmpty){
+          if(!snapshot.hasData || snapshot.data!.isEmpty){
             return Center(child: Text("sem postagens para exibir")); 
         }
         //lista de posts
-        final posts = snapshot.data!;
-        return ListView.builder(
-          itemCount: posts.length,
-          itemBuilder: (context, index){
+
+         final posts = snapshot.data!;
+          return ListView.builder(
+            itemCount: posts.length,
+            itemBuilder: (context, index){
+        final post = posts[index];
             return Card(
               elevation: 5,
               margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-              child: Column(),
+              child: Column(
+                children:[
+                  post['imagem'] == null || post['imagem'].isEmpty? SizedBox() :
+                   Image.network(post['imagem'],width: 400,),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(post['titulo']),
+                      SizedBox(height: 0,),
+                      Text(post['conteudo']),
+                      Text(post['autor']),
+                    ],
+                   ),
+                   ),
+                ],
+                ),
             );
-          },
-        );
+            }
+          );
       },
       ),
     );

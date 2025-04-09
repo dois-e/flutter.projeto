@@ -13,7 +13,7 @@ class Preconfiguracao extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
+      theme: ThemeData.light(),
       home: Login(),
     );
   }
@@ -71,8 +71,8 @@ if(usuarioValido == true){
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(title:Text('tela de login'), 
-      backgroundColor: Colors.lightBlue,foregroundColor: Colors.white,),
+      appBar: AppBar(title:Text('FAÇA LOGIN'), 
+      backgroundColor: const Color.fromARGB(255, 141, 106, 236),foregroundColor: Colors.white,),
 
       body: Padding(
         padding: EdgeInsets.all(50.0),
@@ -81,7 +81,7 @@ if(usuarioValido == true){
           children: [
             FadeInImage(
             placeholder:AssetImage('imagens/gif.fff.gif'),
-            image: AssetImage('imagens/duo.png.png'),
+            image: AssetImage('imagens/DUOWARE.png'),
             fadeInDuration: Duration(seconds: 3),
             fadeOutDuration: Duration(seconds: 9),
             width: 500,
@@ -92,7 +92,7 @@ if(usuarioValido == true){
                  labelText:'email',
                  border: OutlineInputBorder(),
                prefixIcon: Icon(Icons.email),
-               prefixIconColor: Colors.blue, 
+               prefixIconColor: const Color.fromARGB(255, 141, 106, 236),
                ),
             ),
             SizedBox(height: 20,),
@@ -103,7 +103,7 @@ if(usuarioValido == true){
                   labelText: 'Senha',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.lock),
-                  prefixIconColor: Colors.blue,
+                  prefixIconColor: const Color.fromARGB(255, 141, 106, 236),
                   suffixIcon: IconButton(
                     icon: Icon(ocultado ? Icons.visibility : Icons.visibility_off),
                     onPressed: () {
@@ -176,12 +176,12 @@ class CadastroEstado extends State<Cadastro> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Cadastro de novo usuario'),
-      backgroundColor: Colors.blue,),
+      backgroundColor: const Color.fromARGB(255, 198, 16, 243),),
       body: Padding(
         padding: EdgeInsets.all(16.0),
          child: Column(
           children: [
-               Icon(Icons.person_pin, size: 100, color: Colors.blue,),
+               Icon(Icons.person_pin, size: 100, color: const Color.fromARGB(255, 177, 20, 250),),
             SizedBox(height: 20,),
             TextField(
               controller: emailControle,
@@ -189,7 +189,7 @@ class CadastroEstado extends State<Cadastro> {
                  labelText:'email',
                  border: OutlineInputBorder(),
                prefixIcon: Icon(Icons.email),
-               prefixIconColor: Colors.blue, 
+               prefixIconColor: const Color.fromARGB(255, 255, 255, 255), 
                ),
             ),
             SizedBox(height: 20,),
@@ -199,7 +199,7 @@ class CadastroEstado extends State<Cadastro> {
                 labelText:'Seu nome',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.person),
-                prefixIconColor:Colors.blue,   
+                prefixIconColor:const Color.fromARGB(255, 255, 255, 255),   
                ),
             ),
 
@@ -211,7 +211,7 @@ class CadastroEstado extends State<Cadastro> {
                   labelText: 'Senha',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.lock),
-                  prefixIconColor: Colors.blue,
+                  prefixIconColor: const Color.fromARGB(176, 109, 4, 170),
                   suffixIcon: IconButton(
                     icon: Icon(ocultado ? Icons.visibility : Icons.visibility_off),
                     onPressed: () {setState(() {ocultado = !ocultado;

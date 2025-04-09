@@ -18,14 +18,14 @@ class Aplicativo extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'projeto integrador',
-      theme: ThemeData.dark(),
+      theme: ThemeData.light(),
       home: Menu(nomeUsuario:nomeUsuario),
       debugShowCheckedModeBanner: false,
       routes: {
         '/tela1': (context) => Cadastro(pessoas: pessoas),
         '/tela2': (context) => TabelaPai(),
         '/tela3': (context) => CadastrarPostagem(username:nomeUsuario),
-        '/tela4': (context) => Tela4(),
+        '/tela4': (context) => VerPostagens(),
       },
     );
   }
@@ -39,7 +39,7 @@ class Menu extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('bem-vindo $nomeUsuario', style: TextStyle(color: Colors.white)),
-        backgroundColor: Color.fromARGB(255, 104, 79, 173),centerTitle: true,
+        backgroundColor: Color.fromARGB(255, 141, 106, 236),centerTitle: true,
       ),
       body: Center(
         child: GridView.count(
@@ -48,7 +48,7 @@ class Menu extends StatelessWidget {
             Botao(texto: 'cadastrar', rota: '/tela1', icone: Icons.arrow_back, cor: const Color.fromARGB(255, 255, 255, 255)),
             Botao(texto: 'Principal', rota: '/tela2', icone: Icons.home, cor: Colors.white),
             Botao(texto: 'criar postagem', rota: '/tela3', icone: Icons.post_add , cor: Colors.white),
-            Botao(texto: 'tela', rota: '/tela4', icone: Icons.settings, cor: Colors.white),
+            Botao(texto: 'ver postagens', rota: '/tela4', icone: Icons.settings, cor: Colors.white),
           ],
         ),
       ),
