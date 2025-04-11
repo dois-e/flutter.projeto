@@ -80,10 +80,10 @@ if(usuarioValido == true){
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FadeInImage(
-            placeholder:AssetImage('imagens/gif.fff.gif'),
+            placeholder:AssetImage('imagens/all.gif.gif'),
             image: AssetImage('imagens/DUOWARE.png'),
             fadeInDuration: Duration(seconds: 3),
-            fadeOutDuration: Duration(seconds: 9),
+            fadeOutDuration: Duration(seconds: 3),
             width: 500,
             ),
             TextField(
