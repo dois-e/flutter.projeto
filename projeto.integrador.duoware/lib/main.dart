@@ -22,6 +22,7 @@ class Aplicativo extends StatelessWidget {
       home: Menu(nomeUsuario:nomeUsuario),
       debugShowCheckedModeBanner: false,
       routes: {
+        
         '/tela1': (context) => Cadastro(pessoas: pessoas),
         '/tela2': (context) => TabelaPai(),
         '/tela3': (context) => CadastrarPostagem(username:nomeUsuario),
