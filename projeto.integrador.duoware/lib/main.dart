@@ -1,105 +1,105 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:navegacao/Tela1.dart';
-import 'package:navegacao/Tela2.dart';
-import 'package:navegacao/Tela3.dart';
-import 'package:navegacao/Tela4.dart';
-import 'package:navegacao/Postagem.dart';
+import 'login.dart';
+import 'homepage.dart';
+import 'quiz.dart';
+import 'resultados.dart';
 
+void main() {
+  runApp(const MyApp());
+}
 
-//classe pai que configura as rotas
-class Aplicativo extends StatelessWidget {
-  final List<Pessoa> pessoas = [];
-  final String nomeUsuario;
-  Aplicativo({required this.nomeUsuario});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'projeto integrador',
-      theme: ThemeData.light(),
-      home: Menu(nomeUsuario:nomeUsuario),
       debugShowCheckedModeBanner: false,
+      initialRoute: '/',
       routes: {
-        
-        '/tela1': (context) => Cadastro(pessoas: pessoas),
-        '/tela2': (context) => TabelaPai(),
-        '/tela3': (context) => CadastrarPostagem(username:nomeUsuario),
-        '/tela4': (context) => VerPostagens(),
-        '/tela5': (context) => MinhasPostagens(username:nomeUsuario),
-      },
-    );
-  }
-}
-
-class Menu extends StatelessWidget {
-  final String nomeUsuario;
-  Menu({required this.nomeUsuario});
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('bem-vindo $nomeUsuario', style: TextStyle(color: Colors.white)),
-        backgroundColor: Color.fromARGB(255, 141, 106, 236),centerTitle: true,
-      ),
-      body: Center(
-        child: GridView.count(
-          crossAxisCount: 2,
-          children: <Widget>[
-            Botao(texto: 'cadastrar', rota: '/tela1', icone: Icons.arrow_back, cor: const Color.fromARGB(255, 255, 255, 255)),
-            Botao(texto: 'Principal', rota: '/tela2', icone: Icons.home, cor: Colors.white),
-            Botao(texto: 'criar postagem', rota: '/tela3', icone: Icons.post_add , cor: Colors.white),
-            Botao(texto: 'ver postagens', rota: '/tela4', icone: Icons.settings, cor: Colors.white),
-            Botao(texto: 'Minhas Postagens', rota: '/tela5', icone: Icons.settings, cor: Colors.white),
-          ],
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.blue, //cor do item selecionado
-        unselectedItemColor: Colors.grey, //cor dos items nao selecionados
-        items: const [
-          
-         BottomNavigationBarItem(icon: Icon(Icons.settings, color:Color.fromARGB(255, 119, 0, 255)), 
-          label: ""), 
-          BottomNavigationBarItem(icon: Icon(Icons.home, color: Color.fromARGB(255, 119, 0, 255) ,), 
-          label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.account_circle, color: Color.fromARGB(255, 111, 0, 255),),
-           label: ""),
-        ],
-      ),
-    );
-  }
-}
-
-class Botao extends StatelessWidget {
-  final String texto;
-  final String rota;
-  final IconData icone;
-  final Color cor;
-
-  const Botao({Key? key, required this.texto, required this.rota, required this.icone, required this.cor}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(8.0),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Color.fromARGB(255, 170, 138, 255),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(200.0)),
-        ),
-        onPressed: () {
-          Navigator.pushNamed(context, rota);
+        '/': (context) => const Login(),
+        '/homepage': (context) {
+          final nomeUsuario = ModalRoute.of(context)!.settings.arguments as String;
+          return Homepage(nomeUsuario: nomeUsuario);
         },
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icone, color: cor, size: 50),
-            Text(texto, style: TextStyle(color: cor, fontSize: 16.0)),
-          ],
-        ),
-      ),
+
+
+        '/quiz': (context) => Quiz(quiz: [
+          {
+            "pergunta": "O Flutter é?",
+            "respostas": ["Uma linguagem", "Um aplicativo", "Um SDK"],
+            "alternativa_correta": 3
+          },
+          {
+            "pergunta": "Qual linguagem o Flutter usa?",
+            "respostas": ["Dart", "Java", "Kotlin"],
+            "alternativa_correta": 1
+          },
+          {
+            "pergunta": "O que é phishing?",
+            "respostas": [
+              "Golpe que tenta enganar pra pegar dados sensíveis",
+              "nome de uma bebida",
+              "time de futebol",
+            ],
+            "alternativa_correta": 1,
+          },
+          {
+            "pergunta": "qual a função de um antivírus?",
+            "respostas": [
+              "Detectar,bloquear e remover malwares",
+              "Um remedio",
+              "Um fungo",
+            ],
+            "alternativa_correta": 1,
+          },
+          {
+            "pergunta": "oq tem que ter em uma senha?",
+            "respostas": [
+              "Seu nome",
+              "Data de nascimento",
+              "Caracteres variados e misturados",
+            ],
+            "alternativa_correta": 3,
+          },
+          {
+            "pergunta": "oq é autenticação de dois fatores?",
+            "respostas": [
+              "um aparelho",
+              "Camada extra de segurança",
+              "uma banda",
+            ],
+            "alternativa_correta": 2,
+          },
+          {
+            "pergunta": "wifi publico é seguro?",
+            "respostas": [
+              "sim",
+              "yes",
+              "não. Use uma VPN",
+            ],
+            "alternativa_correta": 3,
+          },
+          {
+            "pergunta": "oq é engenharia social?",
+            "respostas": [
+              "um tipo de golpe",
+              "uma faculdade",
+              "uma construção",
+            ],
+            "alternativa_correta": 1,
+          }
+        ]),
+      },
+      onGenerateRoute: (settings) {
+        if (settings.name == '/resultados') {
+          final int acertos = settings.arguments as int;
+          return MaterialPageRoute(
+            builder: (context) => Resultado(acertos: acertos),
+          );
+        }
+        return null;
+      },
     );
   }
 }

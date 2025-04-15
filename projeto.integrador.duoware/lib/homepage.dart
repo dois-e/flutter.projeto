@@ -1,32 +1,41 @@
-
 import 'package:flutter/material.dart';
 
 class Homepage extends StatelessWidget {
-  const Homepage({Key? key}) : super(key: key);
+  final String nomeUsuario;
+  const Homepage({Key? key, required this.nomeUsuario}) : super(key: key);
 
-  @override
+
+
+
   Widget build(BuildContext context) {
     return Scaffold(
+    appBar: AppBar(
+      title: Text("Lista de contatos"),
+      backgroundColor: Colors.red,
+      foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+    ),
+
+
+
+
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-            Image.network('imagens/DUOWARE.png',width: 500,),
-
-            Image.network('imagens/mascote.gif',width: 500,),
+              Image.asset('imagens/DUOWARE.png', width: 400),
+              Image.asset('imagens/mascote.gif', width: 400),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    print('pressionado');
-                    Navigator.pushNamed(context, '/quiz'); 
+                    Navigator.pushNamed(context, '/quiz');
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
                   ),
-                  child: const Text('Jogar', style: TextStyle(fontSize: 50)),
+                  child: const Text('Jogar', style: TextStyle(fontSize: 30)),
                 ),
               ),
             ],
