@@ -4,19 +4,14 @@ class Homepage extends StatelessWidget {
   final String nomeUsuario;
   const Homepage({Key? key, required this.nomeUsuario}) : super(key: key);
 
-
-
-
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-    appBar: AppBar(
-      title: Text("Lista de contatos"),
-      backgroundColor: Colors.red,
-      foregroundColor: const Color.fromARGB(255, 255, 255, 255),
-    ),
-
-
-
+      appBar: AppBar(
+        title: Text("Olá $nomeUsuario"),
+        backgroundColor: const Color.fromARGB(255, 134, 28, 255),
+        foregroundColor: Colors.white,
+      ),
 
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -41,6 +36,36 @@ class Homepage extends StatelessWidget {
             ],
           ),
         ),
+      ),
+
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 1, // 1 = Home selecionado
+        selectedItemColor: const Color.fromARGB(255, 146, 146, 146),
+        unselectedItemColor: Color.fromARGB(255, 119, 0, 255),
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        onTap: (index) {
+          if (index == 0) {
+            Navigator.pushNamed(context, '/config');
+          } else if (index == 2) {
+            Navigator.pushNamed(context, '/perfil');
+          }
+          // index 1 é a própria homepage, não faz nada
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: '',
+          ),
+        ],
       ),
     );
   }
