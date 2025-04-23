@@ -3,6 +3,7 @@ import 'login.dart';
 import 'homepage.dart';
 import 'quiz.dart';
 import 'resultados.dart';
+import 'perfil_page.dart'; // importa a tela de perfil
 
 void main() {
   runApp(const MyApp());
@@ -22,8 +23,10 @@ class MyApp extends StatelessWidget {
           final nomeUsuario = ModalRoute.of(context)!.settings.arguments as String;
           return Homepage(nomeUsuario: nomeUsuario);
         },
-
-
+        '/perfil': (context) {
+          final nomeUsuario = ModalRoute.of(context)!.settings.arguments as String;
+          return PerfilPage(nomeUsuario: nomeUsuario);
+        },
         '/quiz': (context) => Quiz(quiz: [
           {
             "pergunta": "O Flutter é?",
@@ -39,13 +42,13 @@ class MyApp extends StatelessWidget {
             "pergunta": "O que é phishing?",
             "respostas": [
               "Golpe que tenta enganar pra pegar dados sensíveis",
-              "nome de uma bebida",
-              "time de futebol",
+              "Nome de uma bebida",
+              "Time de futebol",
             ],
             "alternativa_correta": 1,
           },
           {
-            "pergunta": "qual a função de um antivírus?",
+            "pergunta": "Qual a função de um antivírus?",
             "respostas": [
               "Detectar,bloquear e remover malwares",
               "Um remedio",
@@ -54,7 +57,7 @@ class MyApp extends StatelessWidget {
             "alternativa_correta": 1,
           },
           {
-            "pergunta": "oq tem que ter em uma senha?",
+            "pergunta": "O que é necessário ter em uma senha?",
             "respostas": [
               "Seu nome",
               "Data de nascimento",
@@ -63,29 +66,29 @@ class MyApp extends StatelessWidget {
             "alternativa_correta": 3,
           },
           {
-            "pergunta": "oq é autenticação de dois fatores?",
+            "pergunta": "O que é autenticação de dois fatores?",
             "respostas": [
-              "um aparelho",
+              "Um aparelho",
               "Camada extra de segurança",
-              "uma banda",
+              "Uma banda",
             ],
             "alternativa_correta": 2,
           },
           {
-            "pergunta": "wifi publico é seguro?",
+            "pergunta": "O Wifi publico é seguro?",
             "respostas": [
-              "sim",
-              "yes",
-              "não. Use uma VPN",
+              "Sim",
+              "Yes",
+              "Não. Use uma VPN",
             ],
             "alternativa_correta": 3,
           },
           {
-            "pergunta": "oq é engenharia social?",
+            "pergunta": "O que é engenharia social?",
             "respostas": [
-              "um tipo de golpe",
-              "uma faculdade",
-              "uma construção",
+              "Um tipo de golpe",
+              "Uma faculdade",
+              "Uma construção",
             ],
             "alternativa_correta": 1,
           }

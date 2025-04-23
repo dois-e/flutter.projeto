@@ -30,7 +30,11 @@ class Homepage extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
                   ),
-                  child: const Text('Jogar', style: TextStyle(fontSize: 30)),
+                  child: const Text('Jogar', style: const TextStyle(fontSize: 30)
+
+                  ),
+                  
+                  
                 ),
               ),
             ],
@@ -41,14 +45,18 @@ class Homepage extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 1, // 1 = Home selecionado
         selectedItemColor: const Color.fromARGB(255, 146, 146, 146),
-        unselectedItemColor: Color.fromARGB(255, 119, 0, 255),
+        unselectedItemColor: const Color.fromARGB(255, 119, 0, 255),
         showSelectedLabels: false,
         showUnselectedLabels: false,
         onTap: (index) {
           if (index == 0) {
             Navigator.pushNamed(context, '/config');
           } else if (index == 2) {
-            Navigator.pushNamed(context, '/perfil');
+            Navigator.pushNamed(
+              context,
+              '/perfil',
+              arguments: nomeUsuario, // <-- corrigido aqui
+            );
           }
           // index 1 é a própria homepage, não faz nada
         },

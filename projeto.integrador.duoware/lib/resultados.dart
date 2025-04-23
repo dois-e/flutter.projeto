@@ -10,7 +10,7 @@ class Resultado extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('Quiz')),
+        title: const Center(child: Text('')),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
