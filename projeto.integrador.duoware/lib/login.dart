@@ -1,3 +1,4 @@
+
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -91,13 +92,11 @@ class _LoginState extends State<Login> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FadeInImage(
-                placeholder: const AssetImage('imagens/all.gif.gif'),
-                image: const AssetImage('imagens/DUOWARE.png'),
-                fadeInDuration: const Duration(seconds: 2),
-                fadeOutDuration: const Duration(seconds: 2),
-                width: 500,
-              ),
+              Image.asset(
+            'imagens/DUOWARE.png',
+              width: 500,
+               ),
+ 
               const SizedBox(height: 20),
               TextField(
                 controller: emailControle,

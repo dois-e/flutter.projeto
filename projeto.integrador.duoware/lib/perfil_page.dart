@@ -19,9 +19,9 @@ class PerfilPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF1E1E2C),
       appBar: AppBar(
-        title: const Text('Perfil'),
+        title: Text('$nomeUsuario'),
         backgroundColor: const Color(0xFF7F00FF),
-        foregroundColor: Colors.white,
+        foregroundColor: const Color(0xFF7F00FF),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -30,8 +30,8 @@ class PerfilPage extends StatelessWidget {
             const SizedBox(height: 20),
             CircleAvatar(
               radius: 60,
-              backgroundImage: NetworkImage('https://i.pravatar.cc/150?img=8'),
-              backgroundColor: const Color.fromARGB(0, 255, 255, 255),
+              backgroundImage: NetworkImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9VFo89cmiLwlKNavW-szCP3gWa43BAhwT-g&s'),
+              backgroundColor: Colors.transparent,
             ),
             const SizedBox(height: 20),
             Text(
@@ -42,6 +42,11 @@ class PerfilPage extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
+              const Divider(
+            height: 40,
+            color: Colors.white24,
+            thickness: 1,
+          ),
             const SizedBox(height: 10),
             Card(
               color: const Color(0xFF3700B3),
@@ -51,7 +56,7 @@ class PerfilPage extends StatelessWidget {
               ),
               child: ListTile(
                 leading: const Icon(Icons.star, color: Colors.amber),
-                title: Text('Nível: ${nivel ?? "Desconhecido"}',
+                title: Text('Nível: ${nivel ?? ""}',
                     style: const TextStyle(color: Colors.white)),
               ),
             ),
@@ -73,15 +78,22 @@ class PerfilPage extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
+              
+              
               child: ListTile(
                 leading: const Icon(Icons.warning, color: Colors.redAccent),
-                title: Text('Ofensiva: ${ofensa ?? "Nenhuma"}',
+                title: Text('Ofensiva: ${ofensa ?? "dias"}',
                     style: const TextStyle(color: Colors.white)),
               ),
-            ),
+            ),  const Divider(
+            height: 40,
+            color: Colors.white24,
+            thickness: 1,
+          ),
           ],
         ),
       ),
+     
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 2,
         selectedItemColor: Colors.white,
@@ -91,7 +103,7 @@ class PerfilPage extends StatelessWidget {
         showUnselectedLabels: false,
         onTap: (index) {
           if (index == 0) {
-            Navigator.pushNamed(context, '/config');
+            Navigator.pushNamed(context, '/config', arguments: nomeUsuario);
           } else if (index == 1) {
             Navigator.pushNamed(context, '/homepage', arguments: nomeUsuario);
           }
